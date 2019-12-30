@@ -1,17 +1,22 @@
-import React from "react";
+import React, { useContext } from "react";
+// import { useLocalStore, useObserver } from "mobx-react";
 import "./App.css";
 
 import { TopBar } from "./components/TopBar";
 import { Items } from "./components/Items";
 import { InputForm } from "./components/InputForm";
 
+import { StoreProvider } from "./helpers/stores";
+
 function App() {
   return (
-    <div className="App">
-      <TopBar />
-      <Items />
-      <InputForm />
-    </div>
+    <StoreProvider>
+      <div className="App">
+        <TopBar />
+        <Items />
+        <InputForm />
+      </div>
+    </StoreProvider>
   );
 }
 

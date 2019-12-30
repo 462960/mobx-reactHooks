@@ -1,4 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useContext, useState, useEffect } from "react";
+import { StoreContext } from "./../helpers/stores";
+
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Divider from "@material-ui/core/Divider";
@@ -25,11 +27,16 @@ const useStyles = makeStyles(theme =>
 
 export const Items = () => {
   const classes = useStyles();
+  const store = useContext(StoreContext);
 
   return (
     <div style={{ maxWidth: "60%", margin: "0 auto" }}>
       <Divider className={classes.divider} />
-      <Paper className={classes.paper}>No bugs listed</Paper>
+      {store.bugs.map((bug, i) => (
+        <Paper key={i} className={classes.paper}>
+          {bug}
+        </Paper>
+      ))}
       <Divider className={classes.divider} />
     </div>
   );
