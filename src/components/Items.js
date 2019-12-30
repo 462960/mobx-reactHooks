@@ -1,9 +1,11 @@
-import React, { useContext, useState, useEffect } from "react";
-import { StoreContext } from "./../helpers/stores";
+import React, { useContext } from "react";
+import { useObserver } from "mobx-react";
 
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Divider from "@material-ui/core/Divider";
+
+import { StoreContext } from "./../helpers/stores";
 
 const useStyles = makeStyles(theme =>
   createStyles({
@@ -28,16 +30,17 @@ const useStyles = makeStyles(theme =>
 export const Items = () => {
   const classes = useStyles();
   const store = useContext(StoreContext);
+  const { bugs } = store;
 
-  return (
+  return useObserver(() => (
     <div style={{ maxWidth: "60%", margin: "0 auto" }}>
       <Divider className={classes.divider} />
-      {store.bugs.map((bug, i) => (
+      {bugs.map((bug, i) => (
         <Paper key={i} className={classes.paper}>
           {bug}
         </Paper>
       ))}
       <Divider className={classes.divider} />
     </div>
-  );
+  ));
 };
