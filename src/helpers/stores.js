@@ -8,6 +8,9 @@ export const StoreProvider = ({ children }) => {
     bugs: [],
     addBug: bug => {
       store.bugs.push(bug);
+    },
+    get bugsCount() {
+      return store.bugs.length;
     }
   }));
 
